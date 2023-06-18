@@ -25,7 +25,8 @@ def chat(messages):
 # Chat loop: ask user for input, pass input to the OpenAI API, and print the response.
 def chat_loop():
     setup()
-    print("Welcome to the chatbot! Type 'q', 'quit' or 'exit' to exit.")
+    print("Welcome to the ChatGPT CLI! Type 'q', 'quit' or 'exit' to exit.")
+    print("---")
     prompt = "AI: Hello, how can I help you?\nYou: "
     messages = [
         {
@@ -37,13 +38,14 @@ def chat_loop():
     while True:
         user_input = input(prompt)
         if user_input.lower().strip() in ["quit", "exit", "q"]:
+            print("---")
             print("Goodbye!")
             break
         messages.append({"role": "user", "content": user_input})
         response = chat(messages)
         response_text = response.choices[0].message.content
         messages.append({"role": "assistant", "content": response_text})
-        prompt = f"AI: {response_text}\nYou: "
+        prompt = f"AI: {response_text}\n---\nYou: "
 
 
 if __name__ == "__main__":
